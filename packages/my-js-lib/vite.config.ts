@@ -6,9 +6,7 @@ import replace from 'rollup-plugin-replace';
 
 export default defineConfig({
     plugins: [
-        react({
-            // jsxRuntime: "classic",
-        }),
+        react(),
         dts({
             insertTypesEntry: true,
         }),
@@ -17,19 +15,11 @@ export default defineConfig({
         sourcemap: true,
         lib: {
             entry: path.resolve(__dirname, 'src/main.tsx'),
-            // entry: path.resolve(__dirname, 'src/lib/index.ts'),
             name: 'MyLib',
             formats: ['umd'],
             fileName: (format) => `my-lib.${format}.js`,
         },
         rollupOptions: {
-            // external: ['react', 'react-dom'],
-            // output: {
-            //     globals: {
-            //         react: 'React',
-            //         'react-dom': 'ReactDOM'
-            //     },
-            // },
             plugins: [
                 replace({
                     'process.env.NODE_ENV': JSON.stringify( 'production' )
