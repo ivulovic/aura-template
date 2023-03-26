@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import Table from "../../../components/Table";
 import useTickerRealtimeData from "../../../providers/TickerSymbol/useTickerRealtimeData";
 import { columnDefinition } from "./data";
@@ -8,7 +8,8 @@ const { Row, Field } = Table;
 
 export default function CryptoTable(props: CryptoTableProps): JSX.Element {
     const { symbols } = props;
-    const data = useTickerRealtimeData({ symbols });
+    const {data, initialData} = useTickerRealtimeData({ symbols });
+    console.log(initialData);
 
     const Header = useMemo(() => {
         return (
@@ -19,7 +20,7 @@ export default function CryptoTable(props: CryptoTableProps): JSX.Element {
             </Row>
         );
     }, [columnDefinition]);
-
+    console.log(data, initialData);
     return (
         <div className="home">
             <Table>
@@ -27,7 +28,9 @@ export default function CryptoTable(props: CryptoTableProps): JSX.Element {
                 {data.map((record) => (
                     <Row key={record.chanId}>
                         {columnDefinition.map((column) => (
-                            <Field key={`${record.chanId}_${column.key}`}>{record[column.key]}</Field>
+                            <Field key={`${record.chanId}_${column.key}`}>
+                                {record[column.key] || initialData?.[record.pair]?.[column.key]}
+                            </Field>
                         ))}
                     </Row>
                 ))}

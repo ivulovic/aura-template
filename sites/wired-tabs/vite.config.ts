@@ -10,6 +10,11 @@ export default defineConfig({
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/api/, ''),
             },
+            '/pub': {
+                target: 'https://api-pub.bitfinex.com/v2',
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/pub/, ''),
+            },
         }
     }
 });

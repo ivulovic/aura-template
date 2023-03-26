@@ -17,7 +17,7 @@ export default function useDataWorker(params: DataWorkerParams) {
 
     const unsubscribe = (chanId: string) => worker.port.postMessage({
         event: 'unsubscribe',
-        chanId: Number(chanId),
+        chanId: Number(chanId)
     });
 
     const startConnection = () => worker.port.postMessage({
@@ -32,7 +32,6 @@ export default function useDataWorker(params: DataWorkerParams) {
         startConnection();
         return () => {
             stopConnection();
-            // worker.port.close();
         }
     }, [])
 

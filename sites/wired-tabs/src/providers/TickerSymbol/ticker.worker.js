@@ -1,10 +1,10 @@
 const ports = [];
 const pendingEvents = {};
+const ws = new WebSocket("wss://api-pub.bitfinex.com/ws/2");
 
 const getUid = () => (new Date().getTime()).toString(36);
 
 self.onconnect = function (e) {
-    const ws = new WebSocket("wss://api-pub.bitfinex.com/ws/2");
     const id = getUid();
     const port = e.source;
     ports.push(port);
@@ -31,7 +31,12 @@ self.onconnect = function (e) {
                 });
             }
         }
-        if (data.event) {
+        if (data.event === 'error') {
+            console.log(data)
+            if(data.msg === 'subscribe: dup'){
+                port.postMessage({...data, event: 'subscribed'});
+            }
+        } else {
             port.postMessage(data);
         }
     };
@@ -39,19 +44,17 @@ self.onconnect = function (e) {
     port.onmessage = (event) => {
         const workerData = event.data;
 
-        const initiatePendingEvents = () => (pendingEvents[id] || []).forEach((p) => ws.send(JSON.stringify(p)));
+        // const initiatePendingEvents = () => (pendingEvents[id] || []).forEach((p) => ws.send(JSON.stringify(p), e=>console.error(e)));
 
         switch (workerData.connection) {
             case "init": {
-                ws.onopen = (e) => initiatePendingEvents();
+                // ws.onopen = (e) => initiatePendingEvents();
                 ws.onmessage = (event) => processTickerEvent(event.data)
-                ws.onclose = (event) => {};
                 ws.onerror = (error) => ws.close();
+                ws.onclose = (event) => {};
                 break;
             }
             case "stop":{
-                ws.close();
-                console.log(pendingEvents[id]);
                 pendingEvents[id] = [];
             }
                 break;
@@ -73,3 +76,11 @@ self.onconnect = function (e) {
         }
     };
 };
+
+const i = setInterval(() => {
+    if(ws.readyState === 1){
+        const allEvents = Object.values(pendingEvents);
+        allEvents.map(actions => actions.map(action => ws.send(JSON.stringify(action))));
+        clearInterval(i);
+    }
+}, 5);
