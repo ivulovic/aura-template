@@ -1,10 +1,12 @@
 const ports = [];
-const pendingEvents = [];
+const pendingEvents = {};
+
+const getUid = () => (new Date().getTime()).toString(36);
 
 self.onconnect = function (e) {
-    const port = e.ports[0];
     const ws = new WebSocket("wss://api-pub.bitfinex.com/ws/2");
-
+    const id = getUid();
+    const port = e.source;
     ports.push(port);
 
     const processTickerEvent = (dataStringified) => {
@@ -34,55 +36,31 @@ self.onconnect = function (e) {
         }
     };
 
-    port.onmessage = function (event) {
+    port.onmessage = (event) => {
         const workerData = event.data;
 
-        // console.log('IncommingEvent', workerData);
-        // port.postMessage('[WORKER] Shared worker onmessage established');
-
-        const initiatePendingEvents = () => pendingEvents.forEach((p) => ws.send(JSON.stringify(p)));
+        const initiatePendingEvents = () => (pendingEvents[id] || []).forEach((p) => ws.send(JSON.stringify(p)));
 
         switch (workerData.connection) {
             case "init": {
-                ws.onopen = (e) => {
-                    // port.postMessage('[SOCKET] Connection established');
-                    initiatePendingEvents();
-                };
-
-                ws.onmessage = (event) => {
-                    processTickerEvent(event.data);
-                    // port.postMessage(processTickerEvent(event.data));
-                    // port.postMessage(event.data);
-                };
-
-                ws.onclose = (event) => {
-                    if (event.wasClean) {
-                        // console.log(`[close] Connection closed cleanly, code=${event.code}`);
-                        // port.postMessage(
-                        //     `[SOCKET] Connection closed cleanly, code=${event.code}`,
-                        // );
-                    } else {
-                        // console.log('[close] Connection died');
-                        // port.postMessage('[SOCKET] Connection died');
-                    }
-                };
-                ws.onerror = (error) => {
-                    // console.log(`[error] ${error.message}`);
-                    // port.postMessage(`[SOCKET] ${error.message}`);
-                    ws.close();
-                };
+                ws.onopen = (e) => initiatePendingEvents();
+                ws.onmessage = (event) => processTickerEvent(event.data)
+                ws.onclose = (event) => {};
+                ws.onerror = (error) => ws.close();
                 break;
             }
-            case "stop":
+            case "stop":{
                 ws.close();
-                pendingEvents.length = 0;
+                console.log(pendingEvents[id]);
+                pendingEvents[id] = [];
+            }
                 break;
 
             default:
                 break;
         }
         if (ws?.readyState !== 1 && workerData.event) {
-            pendingEvents.push(workerData);
+            pendingEvents[id] = [...(pendingEvents[id] || []), workerData];
             return;
         }
         switch (workerData.event) {

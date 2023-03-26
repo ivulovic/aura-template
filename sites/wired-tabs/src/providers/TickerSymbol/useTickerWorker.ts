@@ -4,7 +4,9 @@ import { DataWorkerParams } from "./types";
 export default function useDataWorker(params: DataWorkerParams) {
     const { onMessage } = params;
     const worker = useMemo(() => {
-        return new SharedWorker(new URL("./ticker.worker.js", import.meta.url));
+        return new SharedWorker(new URL("./ticker.worker.js", import.meta.url), {
+            name: 'equilibrius-ticker-worker'
+        });
     }, []);
     
     const subscribe = (symbol: string) => worker.port.postMessage({
@@ -28,7 +30,10 @@ export default function useDataWorker(params: DataWorkerParams) {
 
     useEffect(() => {
         startConnection();
-        return () => stopConnection();
+        return () => {
+            stopConnection();
+            // worker.port.close();
+        }
     }, [])
 
     useEffect(() => {
