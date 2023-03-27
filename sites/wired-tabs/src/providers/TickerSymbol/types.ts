@@ -5,7 +5,7 @@ export interface DataWorkerParams {
 export interface TickerInfo {
     chanId: number;
     channel: "ticker";
-    event: "subscribed" | "data"
+    event: "subscribed" | "ws" | "fetch";
     pair: string;
     symbol: string;
 }
