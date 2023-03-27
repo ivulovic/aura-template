@@ -9,6 +9,7 @@ export default function Home(): JSX.Element {
     return (
         <div className="home">
             <CryptoTable symbols={symbols} />
+            {/* <CryptoTable symbols={symbols} /> */}
         </div>
     );
 }
