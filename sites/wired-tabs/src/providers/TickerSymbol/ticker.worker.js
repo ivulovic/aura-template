@@ -6,7 +6,7 @@ const ws = new WebSocket("wss://api-pub.bitfinex.com/ws/2");
 ws.onerror = (error) => ws.close();
 ws.onclose = (event) => console.log("Closed WS connection");
 ws.onopen = (e) => {
-        console.log('opened');
+    console.log('opened');
 }
 
 self.onconnect = (e) => {

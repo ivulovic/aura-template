@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { DataWorkerParams } from "./types";
 
 export default function useDataWorker(params: DataWorkerParams) {
