@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import logo from './logo.svg';
-import { MyButton } from 'my-lib';
-import 'my-lib/style.css';
+import { MyButton } from 'my-ui';
 import './App.css';
 
 function App() {
