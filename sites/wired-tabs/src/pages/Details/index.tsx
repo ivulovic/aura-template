@@ -1,5 +1,3 @@
 export default function Details(): JSX.Element {
-    return <div className="details">
-        Details
-    </div>
+  return <div className="details">Details</div>;
 }

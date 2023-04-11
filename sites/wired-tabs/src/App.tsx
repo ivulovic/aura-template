@@ -9,23 +9,23 @@ import "./App.css";
 import AuthProvider from "./providers/Auth";
 
 function App() {
-    return (
-        <BrowserRouter>
-            <AuthProvider>
-                <div className="layout">
-                    <Header />
-                    <Sidebar />
-                    <Main>
-                        <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/details/:id" element={<Details />} />
-                            <Route path="/favorites" element={<Favorites />} />
-                        </Routes>
-                    </Main>
-                </div>
-            </AuthProvider>
-        </BrowserRouter>
-    );
+  return (
+    <BrowserRouter>
+      <AuthProvider>
+        <div className="layout">
+          <Header />
+          <Sidebar />
+          <Main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/details/:id" element={<Details />} />
+              <Route path="/favorites" element={<Favorites />} />
+            </Routes>
+          </Main>
+        </div>
+      </AuthProvider>
+    </BrowserRouter>
+  );
 }
 
 export default App;

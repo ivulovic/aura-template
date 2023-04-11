@@ -4,9 +4,7 @@ import Row from "./Row";
 import { TableProps } from "./types";
 
 function Table(props: PropsWithChildren<TableProps>): JSX.Element {
-    return <table>
-        {props.children}
-    </table>;
+  return <table>{props.children}</table>;
 }
 
 Table.Row = Row;

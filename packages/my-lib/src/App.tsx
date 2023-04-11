@@ -1,9 +1,7 @@
-import MyButton from './lib/Button/MyButton';
+import MyButton from "./lib/Button/MyButton";
 
 function App() {
-    return (
-        <MyButton />
-    );
+  return <MyButton />;
 }
 
 export default App;
