@@ -1,14 +1,18 @@
 import { MyButton } from "my-ui";
 import { useState } from "react";
 
-import "./App.css";
-import { FormattedMessage, useLanguageProvider } from "./core";
+import { FormattedMessage, useDispatch, useLanguageProvider } from "@my-site/core";
+
 import logo from "./logo.svg";
+import { useThemeActions } from "./providers/Theme/slice";
+import { useDetectTheme } from "./providers/Theme/useDetectTheme";
 
 function App(): JSX.Element {
   const [count] = useState(0);
   const { locale, changeLocale } = useLanguageProvider();
-
+  const dispatch = useDispatch();
+  const { opositeTheme } = useDetectTheme();
+  const actions = useThemeActions();
   return (
     <div className="App">
       <header className="App-header">
@@ -19,6 +23,9 @@ function App(): JSX.Element {
         </p>
         <button className="dispatch-button" onClick={() => changeLocale(locale === "en" ? "de" : "en")}>
           Change
+        </button>
+        <button className="dispatch-button" onClick={() => dispatch(actions.changeTheme(opositeTheme))}>
+          Change theme to: {opositeTheme}
         </button>
         <MyButton />
         <p>

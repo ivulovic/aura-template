@@ -8,6 +8,7 @@ import { translationMessages } from "@my-site/translations";
 import App from "./App";
 import { IntlProvider, defaultLocale } from "./core";
 import store from "./core/redux/utils/createStore";
+import { ThemeProvider } from "./providers/Theme";
 
 const container = document.getElementById("root");
 
@@ -17,7 +18,9 @@ root.render(
   <ReduxProvider store={store.store}>
     <PersistGate loading={<></>} persistor={store.persistor}>
       <IntlProvider locale={defaultLocale} defaultLocale={defaultLocale} messages={translationMessages}>
-        <App />
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
       </IntlProvider>
     </PersistGate>
   </ReduxProvider>,
