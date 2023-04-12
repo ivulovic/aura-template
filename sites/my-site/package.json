@@ -16,7 +16,8 @@
     "redux-saga": "^1.2.3",
     "redux-injectors": "^2.1.0",
     "redux-persist": "^6.0.0",
-    "@reduxjs/toolkit": "^1.9.3"
+    "@reduxjs/toolkit": "^1.9.3",
+    "react-intl": "^6.3.2"
   },
   "devDependencies": {
     "@types/react": "18.0.28",

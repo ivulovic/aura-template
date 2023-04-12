@@ -2,20 +2,25 @@ import { MyButton } from "my-ui";
 import { useState } from "react";
 
 import "./App.css";
+import { FormattedMessage, useLanguageProvider } from "./core";
 import logo from "./logo.svg";
 
 function App(): JSX.Element {
   const [count] = useState(0);
+  const { locale, changeLocale } = useLanguageProvider();
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>Hello Vite + React!</p>
-        <p>count is: {count}</p>
         <p>
-          <MyButton />
+          <FormattedMessage id="homepage.title" />
         </p>
+        <button className="dispatch-button" onClick={() => changeLocale(locale === "en" ? "de" : "en")}>
+          Change
+        </button>
+        <MyButton />
         <p>
           Edit <code>App.tsx</code> and save to test HMR updates.
         </p>
