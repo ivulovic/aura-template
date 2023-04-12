@@ -1,7 +1,7 @@
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-// import tsConfigPaths from "vite-tsconfig-paths";
+import tsConfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tsConfigPaths()],
 });
