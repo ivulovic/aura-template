@@ -1,11 +1,17 @@
 import { createSlice, createPersistedSlice } from "@my-site/core";
 
+import { PERSISTED_SCOPE, initialState } from "./constants";
+
 const slice = createSlice({
-  name: "persistedKey",
-  initialState: { persisted: "persisted" },
+  name: PERSISTED_SCOPE,
+  initialState: initialState,
   reducers: {
-    hello: () => {},
+    updatePersisted: (state) => {
+      state.persisted = Math.random();
+    },
   },
 });
 
-export default createPersistedSlice("persistedKey", slice.reducer);
+export const { actions, reducer } = slice;
+
+export default createPersistedSlice(PERSISTED_SCOPE, reducer);

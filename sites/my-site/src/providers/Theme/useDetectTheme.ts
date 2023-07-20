@@ -1,7 +1,7 @@
 import { useSelector } from "@my-site/core";
 
-import { selectThemeKey } from "./slice/selectors";
-import { ThemeEnum } from "./slice/types";
+import { selectThemeKey } from "./selectors";
+import { ThemeEnum } from "./types";
 import { isSystemDark } from "./utils";
 
 export interface IThemeDetector {

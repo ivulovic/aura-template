@@ -1,0 +1,16 @@
+.about-page{
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 0.5rem;
+    h1{
+        margin: 0 0 1rem 0;
+        font-weight: 400;
+    }
+    ul {
+        display: grid;
+        gap: 1rem;
+        li{
+            list-style-position: inside;
+        }
+    }
+}

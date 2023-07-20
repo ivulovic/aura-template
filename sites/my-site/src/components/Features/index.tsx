@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { FormattedMessage, useLanguageProvider } from "@my-site/core";
 import { useThemeActions } from "@my-site/providers/Theme/slice";
@@ -8,6 +8,8 @@ import { useDetectTheme } from "@my-site/providers/Theme/useDetectTheme";
 import { FeaturesEnum } from "./types";
 
 import "./style.scss";
+import { selectPersisted } from "@my-site/slices/persisted/selectors";
+import { actions } from "@my-site/slices/persisted";
 
 export default function Features(): JSX.Element {
   const { locale, changeLocale } = useLanguageProvider();
@@ -16,7 +18,7 @@ export default function Features(): JSX.Element {
   const dispatch = useDispatch();
   const { opositeTheme } = useDetectTheme();
   const { changeTheme } = useThemeActions();
-
+  const persisted = useSelector(selectPersisted);
   return (
     <div className="features-block">
       <section id="features" className="features">
@@ -27,6 +29,9 @@ export default function Features(): JSX.Element {
               <div id="feature-1" className={`features-textblock animated fadeIn ${active === FeaturesEnum.PredictableState ? "__active" : ""}`}>
                 <h2>Predictable State</h2>
                 <p>Need Global state management? Redux Toolkit is already setup and ready to use!</p>
+                <button className="feature" onClick={() => dispatch(actions.updatePersisted(opositeTheme))}>
+                  Update persisted value: {persisted}
+                </button>
               </div>
               <div id="feature-2" className={`features-textblock animated fadeIn ${active === FeaturesEnum.I18N ? "__active" : ""}`}>
                 <h2>

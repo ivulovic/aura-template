@@ -1,14 +1,15 @@
-import persistService from "../../../slices/persisted/index";
+import { PERSISTED_SCOPE } from "@my-site/slices/persisted/constants";
 
-// import { PERSISTED_SCOPE } from '@implementation/persisted/settings';
+import persistedSlice from "../../../slices/persisted/index";
+
 import { configureAppStore } from "./configureStore";
 
-const rootServices = {
-  ["persistedKey"]: persistService,
+const rootReducers = {
+  [PERSISTED_SCOPE]: persistedSlice,
 };
 
-const store = configureAppStore(rootServices, {
-  blacklist: Object.keys(rootServices),
+const store = configureAppStore(rootReducers, {
+  blacklist: Object.keys(rootReducers),
 });
 
 export default store;
