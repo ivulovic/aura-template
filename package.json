@@ -1,13 +1,15 @@
 {
-  "name": "lib-example",
+  "name": "equilibrius",
   "private": true,
   "scripts": {
+    "start":"yarn workspace @equilibrius/web start",
+    "build":"yarn workspace @equilibrius/web build",
     "prettier": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts|tsx)\""
   },
   "workspaces": {
     "packages": [
       "packages/*",
-      "sites/*"
+      "platforms/*"
     ]
   },
   "devDependencies": {

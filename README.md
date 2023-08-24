@@ -13,13 +13,13 @@ yarn install
 Build the library:
 
 ```bash
-cd packages/my-lib && yarn build
+cd packages/ui && yarn build
 ```
 
 Run the development server of the test project:
 
 ```bash
-cd sites/my-site && yarn dev
+cd platforms/web && yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

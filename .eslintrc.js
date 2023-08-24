@@ -61,7 +61,6 @@ module.exports = {
         "@typescript-eslint/explicit-module-boundary-types": ["off"],
         "@typescript-eslint/no-empty-function": ["off"],
         "@typescript-eslint/no-explicit-any": ["off"],
-
         "prettier/prettier": ["error", {}, { usePrettierrc: true }],
       },
       settings: {
@@ -70,7 +69,7 @@ module.exports = {
           typescript: {},
           alias: {
             map: [
-              ["@my-site", "./sites/my-site/src"]
+              ["@web", "./sites/web/src"]
             ],
             extensions: [
               ".ts",
