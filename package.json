@@ -3,13 +3,15 @@
   "private": true,
   "scripts": {
     "start":"yarn workspace @equilibrius/web start",
+    "start:api":"yarn workspace @equilibrius/api start",
     "build":"yarn workspace @equilibrius/web build",
     "prettier": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts|tsx)\""
   },
   "workspaces": {
     "packages": [
       "packages/*",
-      "platforms/*"
+      "platforms/*",
+      "server/*"
     ]
   },
   "devDependencies": {
