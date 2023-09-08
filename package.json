@@ -11,7 +11,8 @@
     "packages": [
       "packages/*",
       "platforms/*",
-      "server/*"
+      "server/*",
+      "micro/*"
     ]
   },
   "devDependencies": {
