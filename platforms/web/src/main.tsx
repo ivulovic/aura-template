@@ -5,6 +5,12 @@ import { PersistGate } from "redux-persist/integration/react";
 
 import "./index.css";
 import { translationMessages } from "@web/translations";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import RemotePage from "remoteApp/RemotePage";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import Button from "remoteApp/Button";
 
 import DefaultLayout from "./components/Layout/Default";
 import { IntlProvider, defaultLocale } from "./core";
@@ -30,7 +36,20 @@ const router = createBrowserRouter([
     path: "about",
     element: (
       <DefaultLayout>
-        <AboutPage />
+        <div className="page-content">
+          <AboutPage />
+        </div>
+      </DefaultLayout>
+    ),
+  },
+  {
+    path: "remote",
+    element: (
+      <DefaultLayout>
+        <div className="page-content">
+          <RemotePage />
+          <Button />
+        </div>
       </DefaultLayout>
     ),
   },

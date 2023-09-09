@@ -52,3 +52,6 @@ body {
   text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
 }
+.page-content{
+  min-height: calc(100vh - 160px);
+}
