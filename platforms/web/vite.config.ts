@@ -17,8 +17,11 @@ export default defineConfig({
         // if real url is required we can deploy this app under the domain, and put dist in folder we are hosting our app.
         // remoteApp: "http://localhost:5001/remote-app-dist/assets/remoteEntry.js",
         remoteApp: "/remoteapp/assets/remoteEntry.js", // this can be done in prod and on nginx just set other root
+        // authApp: "/authremoteapp/assets/remoteEntry.js",
+        authApp: "http://localhost:5002/auth-app-dist/assets/remoteEntry.js",
       },
-      shared: ["react", "react-dom"],
+      shared: ["react", "react-dom", "redux", "react-redux", "redux-saga", "redux-injectors", "redux-persist", "@reduxjs/toolkit"],
+      // shared: ["react", "react-dom"],
     }),
   ],
   build: {
@@ -40,6 +43,15 @@ export default defineConfig({
         target: "https://echo-api-sigma.vercel.app",
         changeOrigin: true,
         // rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+      "/authremoteapp": {
+        target: "http://localhost:5002/auth-remote-dist",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/authremoteapp/, ""),
+      },
+      "/auth-remote-dist": {
+        target: "http://localhost:5002",
+        changeOrigin: true,
       },
       "/remoteapp": {
         target: "http://localhost:5001/remote-app-dist",
