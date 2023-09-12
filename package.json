@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "start":"yarn workspace @equilibrius/web start",
+    "start:with-remote":"yarn workspace @equilibrius/web-with-remote start",
     "start:api":"yarn workspace @equilibrius/api start",
     "build":"yarn workspace @equilibrius/web build",
     "prettier": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts|tsx)\""

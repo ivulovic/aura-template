@@ -1,4 +1,4 @@
-import { BiLayer } from "react-icons/bi";
+import { BiHourglass, BiLayer } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import "./style.scss";
 
@@ -20,6 +20,11 @@ export default function Header(): JSX.Element {
           <li>
             <Link to="/about">
               <BiLayer /> About
+            </Link>
+          </li>
+          <li>
+            <Link to="/remote">
+              <BiHourglass /> Remote
             </Link>
           </li>
         </ul>

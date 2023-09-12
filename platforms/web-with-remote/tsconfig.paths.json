@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "baseUrl": "./src",
+    "paths": {
+      "@web": ["."],
+      "@web/*": ["./*"],
+    }
+  }
+}
