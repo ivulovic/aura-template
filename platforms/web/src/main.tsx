@@ -1,10 +1,9 @@
+import { translationMessages } from "@web/translations";
 import { createRoot } from "react-dom/client";
 import { Provider as ReduxProvider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
-
 import "./index.css";
-import { translationMessages } from "@web/translations";
 
 import DefaultLayout from "./components/Layout/Default";
 import { IntlProvider, defaultLocale } from "./core";
@@ -30,7 +29,9 @@ const router = createBrowserRouter([
     path: "about",
     element: (
       <DefaultLayout>
-        <AboutPage />
+        <div className="page-content">
+          <AboutPage />
+        </div>
       </DefaultLayout>
     ),
   },

@@ -6,6 +6,7 @@ import tsConfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
   plugins: [react(), tsConfigPaths(), viteCompression()],
   build: {
+    // target: "esnext",
     rollupOptions: {
       output: {
         minifyInternalExports: true,

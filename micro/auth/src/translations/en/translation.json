@@ -1,0 +1,8 @@
+{
+  "features":{
+    "title": "Multilingual Support",
+    "description": "In a world where everyone is connected, multilingual applications are something that is alredy standardized. With our starter you get English and Deutch out of box!",
+    "en": "English",
+    "de": "German"
+  }
+}
